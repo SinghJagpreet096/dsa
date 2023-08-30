@@ -15,33 +15,26 @@ Note that if a shop closes at the jth hour, it means the shop is closed at the h
 
 class Solution:
     def bestClosingTime(self, customers:str) -> int:
-        # print(" ")
-        min_penalty = 106
-        close_hour = 0
-        # if 'N' not in customers:
-        #     return len(customers)
-        for i in range(len(customers)):
-            penalty = 0
-            for j in range(len(customers)):
-                if j < i:
-                    if customers[j]=='N':
-                        penalty+=1
-                elif j >= i:
-                    if customers[j]=='Y':
-                        penalty+=1
-            if penalty < min_penalty:
-                min_penalty = penalty
-                close_hour = i
+        max_score = 0
+        score = 0
+        best_hour = -1
+        for i, c in enumerate(customers):
+            
+            score +=1 if c == 'Y' else -1
+            # print(f"score:{score},i:{i}")
 
-        if close_hour == len(customers)-1:
-            return len(customers)
-    
+            if score > max_score:
+                max_score, best_hour = score, i
+                # print(f"max_score:{max_score}, best: {best_hour}")
+        return best_hour+1 
 s = Solution()
 print(f"Input:'YYNY'\n Output:{s.bestClosingTime('YYNY')}")
 
 print(f"Input:'NNNNN'\n Output:{s.bestClosingTime('NNNNN')}")
 
-print(f"Input:'YYYY'\n Output:{s.bestClosingTime('YYYY')}")
+print(f"Input:'YNYY'\n Output:{s.bestClosingTime('YNYY')}")
+
+
 
         
 
