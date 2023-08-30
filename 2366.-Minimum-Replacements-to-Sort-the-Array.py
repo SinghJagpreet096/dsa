@@ -12,29 +12,27 @@ Return the minimum number of operations to make an array that is sorted in non-d
 ## and count the no of splits.
 
 class Solution:
-    # def split(first, middle, last):
-    #     i=first,j=middle
-    #     while i!=j:
-    #         i + (j-i)
-    #         i+=1
-            
-
-
     def minimumReplacement(self, nums:list[int]) -> int:
-        SORTED = True
+        n = len(nums)
+        last = nums[n-1]
         count = 0
-        for i in range(len(nums)-1):
-            if nums[i] > nums[i+1]:
-                SORTED = False
-                v = nums[i]
 
-                while v > nums[i+1]:
-                    v = v-nums[i-1]
-                    count +=1
-                nums[i]=v
-        if SORTED:
-            return 0
-        return count
+        ## traverse reverse
+        for i in range(n-2,-1,-1):
+            # print(f"last:{last},nums[i]:{nums[i]}")
+            if nums[i] > last:
+
+                t = nums[i]//last ## No. of times number to be divided to equal last
+                # print(f"t:{t}")
+                if nums[i]%last: ## if does not divide completly add one to t
+                    t+=1
+                last = nums[i]//t ## update last with numsn divide by t
+                print(last)
+                count += t-1
+            else:
+                last = nums[i]
+        return count 
+
 
 
                 
@@ -45,6 +43,8 @@ print(s.minimumReplacement(nums=[1,2,3,4,5]))
 
 print(s.minimumReplacement(nums=[2,10,20,19,1]))
 
+## time complexity : O(n)
+## space complexity: O(1)
         
 
 """
