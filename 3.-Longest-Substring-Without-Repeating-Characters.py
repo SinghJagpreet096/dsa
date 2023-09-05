@@ -7,30 +7,37 @@ substring
 ## check if the next element exist in previous substr if yes break the substr and store as substr
 ## for the next substr check if is longer than previous substr
 
+
+## optimal solution with two pointers and set
+## take left and right pointer as boundaries of substr
+## iterate the str with right pointer
+## keep storing the char in charSet until no repeated char and update the maxlength if needed
+## if char is repeated in the set remove all char from charSet using left pointer until the right pointer
+## do the same for remaining str
+## return maxlength
+
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if len(s)==1:
-            return 1
-        longest_ss = ''
-        ss = ''
-        for ch in s:
-            if ch not in ss:
-                ss = ss+ch
-                if len(ss) > len(longest_ss):
-                    longest_ss = ss
-            elif ch in ss:
-                if len(ss) > len(longest_ss):
-                    # print("ss",ss)
-                    longest_ss = ss
-                    ss=ch
-            
-        # print(longest_ss)
-        return len(longest_ss)
+        n = len(s)
+        left = 0
+        maxLength = 0
+        charSet = set()
+        for right in range(n):
+            if s[right] not in charSet:
+                charSet.add(s[right])
+                maxLength = max(maxLength, right - left + 1)
+            else:
+                while s[right] in charSet:
+                    charSet.remove(s[left])
+                    left += 1
+                charSet.add(s[right])
+        return maxLength
+        
 s = Solution()
 print(s.lengthOfLongestSubstring("abcabcbb"))         
 print(s.lengthOfLongestSubstring("pwwkew"))
 print(s.lengthOfLongestSubstring("c"))
-print(s.lengthOfLongestSubstring("au"))
+print(s.lengthOfLongestSubstring("aab"))
 
 
 
