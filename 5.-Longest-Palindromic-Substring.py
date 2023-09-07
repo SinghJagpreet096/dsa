@@ -1,29 +1,37 @@
 """Given a string s, return the longest palindromicsubstring in s."""
 
 
-##brute force
-## create all possible substr and find the max substr which is palindrome
+##using two pointers
+## use left and right pointers
+## 1.check the substr is palindrome if True break and return substr
+## decrement right by 1 and check 1 else increment left and check 1
+## else increment left by 1 and decrement right 1 
+## repeat until left <= right
+
+
+## optimal solutions
+## palindrome consist of a center and similar elements  on the left and right of center, 
+## as long the left and right of the center are equal we keep increasing the substr
+## we iterate through the string considering each element as center
+## and call expand function which returns palindrome str by expanding the elements around center if elements are similar
+## for edge case if two elements are same ("bb") we call expand on i,i+1
+## we keep writting to longestSubstr if new substr in greater than the existing one
+
 
 
 
 class Solution:
     def longestPalindrome(self, s:str) -> str:
         longestSubstr = ''
-        if len(s)==1:
-            return s
         for i in range(len(s)):
-            for j in range(i+1,len(s)):
-                if s[i]==s[j]:
-                    substr=s[i:j+1]
-                else:
-                    substr = s[i:j]
-                if substr == substr[-1::-1]:
-                    # print(substr)
-                    if len(substr) > len(longestSubstr):
-                        longestSubstr = substr
+            longestSubstr = max(longestSubstr, expand(s,i,i), expand(s,i,i+1), key=len)
         return longestSubstr
-        
-                
+
+def expand(s,i,j) -> str:
+    while i>=0 and j<len(s) and s[i]==s[j]:
+        i -=1
+        j +=1
+    return s[i+1:j]
 
 s = Solution()
 print(s.longestPalindrome('babad'))
