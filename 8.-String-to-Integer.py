@@ -32,15 +32,6 @@ class Solution:
         ## remove preceding spaces
         s = s.strip()
 
-        
-        ## negative or positive
-        # if s.startswith('-'):
-        #     # print("a")
-        #     NEG = True
-        #     s = s[1:]
-        #     # print(s)
-        # if s.startswith("+"):
-        #     s = s[1:]
         for ch in s:
             if ch=='-' and START==False:
                 negative +=1
@@ -49,12 +40,10 @@ class Solution:
                 positive += 1
                 continue
             
-            # print(ch, START)
             ch = ord(ch)
             
             START=True
             
-            # print(ch)
             if ch >= 48 and ch <=57 and START:
         
                 result = result*10 + (ch - zero)
