@@ -2,33 +2,25 @@
 
 If there is no common prefix, return an empty string ""."""
 
+
+## technically optimal approach is two find a no solution (reverse approach)
+## sort the array lexical order 
+## compare the elements first str with the last 
+## keep adding elements to add until there is match 
+## else return ans
+
 class Solution:
     def longestCommonPrefix(self, strs:list[str]) -> str:
-        longestPrefix = min(strs,key=len)
-        # print(longestPrefix)
-        
-        while len(longestPrefix) > 0:
-            print(longestPrefix)
-            FLAG = False
-            for i in strs:
-
-                if longestPrefix != i:
-                    if i.startswith(longestPrefix):
-                        print(i,"1")
-                        continue
-                    else:
-                        # print(i,"2")
-                        FLAG =True
-            if FLAG:
-                longestPrefix = longestPrefix[:-1]
-            else:
-                print(len(longestPrefix))
-                if longestPrefix:
-                    # print('9')
-                    return longestPrefix
-                else:
-                    return ""
-
+        ans = ""
+        strs = sorted(strs)
+        # print(strs)
+        first = strs[0]
+        last = strs[-1]
+        for i in range(min(len(first),len(last))):
+            if first[i] != last[i]:
+                return ans
+            ans+=first[i]
+        return ans
 
 
 
@@ -38,6 +30,8 @@ class Solution:
 
 
 s = Solution()
-# print(s.longestCommonPrefix(["flower","flow","flight"]))
-print(s.longestCommonPrefix(["dog","racecar","car"]))
+print(s.longestCommonPrefix(["flower","flow","flight"]))
+print(s.longestCommonPrefix(["","carrace","car"]))
+print(s.longestCommonPrefix(["q","f","a"]))
+
 
