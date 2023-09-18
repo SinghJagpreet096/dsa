@@ -3,7 +3,7 @@ class Solution:
         strength = {}
         
         for i, row in enumerate(mat):
-            print(i,row)
+            # print(i,row)
             count = 0
             for j, val  in enumerate(row):
                 if val:
@@ -11,16 +11,19 @@ class Solution:
                 else:
                     break
             strength[i] = count
-        print(strength)
+        result = sorted(strength.items(), key= lambda item :item[1])[:k]
+        return [i[0] for i in result]
+        
+
         
 
         
     
 s = Solution()
-s.kWeakestRows([[1,1,0,0,0],
+print(s.kWeakestRows([[1,1,0,0,0],
  [1,1,1,1,0],
  [1,0,0,0,0],
  [1,1,0,0,0],
  [1,1,1,1,1]], 
-k = 3)
+k = 3))
 
