@@ -10,13 +10,18 @@ You must solve the problem without modifying the array nums and uses only consta
 ## sort the array
 ## iterate the array and find if no is equal to next no.
 
+## optimal solution
+## define a set uni which keep track of all unique values and if element is aleardy in set return element
+
 
 class Solution:
     def findDuplicate(self, nums:list[int]) -> int:
-        nums.sort()
-        for i, val in enumerate(nums[:-1]):
-            if nums[i] == nums[i+1]:
-                return val
+        uni = set()
+        for i in nums:
+            if i in uni:
+                return i
+            else:
+                uni.add(i)
             
 
 s = Solution()
