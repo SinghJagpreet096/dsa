@@ -13,35 +13,29 @@ Return the minimum number of operations to reduce x to exactly 0 if it is possib
 ## and check which is bigger between first and last
 ## substract the no from x and count the steps
 
+
+
+
 class Solution:
     def minOperations(self, nums:list[int],x:int) -> int:
+        target = sum(nums) - x
+        max_len = 0
         left = 0
-        right = len(nums)-1
-        count = 0
+        n = len(nums)
+        cur_sum = 0
+        if target == 0:
+            return n
+        for right,val in enumerate(nums):
+            cur_sum += val
+            while left <=right and cur_sum > target:
+                cur_sum -= nums[left]
+                left +=1
+            if cur_sum == target:
+                max_len = max(max_len,right-left+1)
+            
 
-        while left < right:
-            if x == nums[left] or x == nums[right]:
-                return count + 1
-
-            if nums[left] < x and nums[right] < x:
-                x = x - max(nums[left],nums[right])
-                count += 1
-                if nums[left] > nums[right]:
-                    left += 1 
-                else:
-                    right -= 1
-
-            elif nums[left] < x:
-                x = x - nums[left]
-                left += 1
-                count += 1
-
-            else:
-                x = x - nums[right]
-                right -= 1
-                count += 1
-        return -1
-
+        return n - max_len if max_len else -1
+                
 
 s = Solution()
-print(s.minOpererations([3,2,20,1,1,3], x = 10))
+print(s.minOperations([3,2,20,1,1,3], x = 10))
