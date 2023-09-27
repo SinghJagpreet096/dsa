@@ -1,6 +1,6 @@
 class Solution:
     def divide(self, dividend:int, divisor:int) -> int:
-        quotient = 0
+        # quotient = 0
         upper_bound = 2**31-1
         lower_bound = -2**31
         NEG = False
@@ -9,9 +9,8 @@ class Solution:
         elif divisor < 0 or dividend < 0:
             NEG = True
         dividend,divisor = abs(dividend),abs(divisor)
-        while dividend >= divisor:
-            dividend -= divisor
-            quotient +=1
+        quotient = len(range(0,dividend-divisor+1,divisor))
+            
         if NEG:
             quotient = -quotient
 
