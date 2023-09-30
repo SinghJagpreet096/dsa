@@ -35,7 +35,8 @@ class Solution:
             # print(nums[mid],mid)
             if nums[mid] == target:
                 return mid
-            elif nums[mid] > target and nums[left] <= target:
+            elif (nums[left] < nums[mid] and target >= nums[left] and target < nums[mid]) or \
+                (nums[left] > nums[mid] and( target < nums[mid] or target >= nums[left]) ):
                 right = mid-1
             else:
                 left = mid + 1
@@ -47,4 +48,6 @@ if __name__ == "__main__":
     print(s.search([4,5,6,7,0,1,2],target=0))
     print(s.search([4,5,6,7,0,1,2],target=3))
     print(s.search([4,5,6,7,0,1,2],target=5))
+    print(s.search([1,2,3,4,5,6],target=4))
+
 
