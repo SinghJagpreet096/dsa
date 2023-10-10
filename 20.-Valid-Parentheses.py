@@ -11,31 +11,26 @@ Every close bracket has a corresponding open bracket of the same type.
 """
 class Solution:
     def isValid(self, s: str) -> bool:
-        for i in range(1,len(s)):
-            if s[i] == ")":
-                if s[i-1] == "(":
-                    # print(s[i],"()")
-                    continue
-                else:return False
-            if s[i] == "]":
-                if s[i-1] == "[":
-                    # print(s[i],"[]")
-                    continue
-                else:
+        stack = []
+        for c in s:
+            if c == "(" or c == "{" or c == "[":
+                stack.append(c)
+            else:
+                if len(stack)==0 or not self.isMatching(stack[len(stack)-1],c):
                     return False
-            if s[i] == "}":
-                if s[i-1] == "{":
-                    # print(s[i],"{}")
-                    continue
                 else:
-                    return False
+                    stack.pop()
+        return len(stack)==0
+    
+    def isMatching(self, open:chr, close:chr) -> bool:
 
-        return True
-                
-
+        return (open == "(" and close == ")") or (open == "{" and close == "}") or (open == "[" and close == "]")
+            
 
 if __name__ == "__main__":
     s = Solution()
     print(s.isValid("()"))
     print(s.isValid("()[]{}"))
     print(s.isValid("(]"))
+    print(s.isValid("["))
+
