@@ -4,13 +4,14 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-class Solution:
-    def diameterOfBinaryTree(self, root:[TreeNode]) -> int:
+def diameterOfBinaryTree(self, root:Optional[TreeNode]) -> int:
         def longestPath(root):
             if root is None:
                 return 0
+            
             return 1 + max(longestPath(root.left),longestPath(root.right))
+        # print(longestPath(root.left),longestPath(root.right))
         if root is None:
             return 0
-        
-        return sum(longestPath(root.left),longestPath(root.right))
+
+        return max((longestPath(root.left) + longestPath(root.right)),max(self.diameterOfBinaryTree(root=root.left),self.diameterOfBinaryTree(root=root.right)) )
