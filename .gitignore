@@ -1,3 +1,4 @@
 venv/
 .jovianrc
 leetcode/System
+leetcode/.DS_Store
