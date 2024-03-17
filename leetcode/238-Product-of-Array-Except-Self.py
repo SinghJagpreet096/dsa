@@ -26,22 +26,33 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
 """
 from typing import List
 class Solution:
-
-    def productExceptSelf(self, nums:List[int]) -> List[int]:
-        result = []
-        
-        for i, row in enumerate(nums):
-            prod = 1
-            for j, val in enumerate(nums):
-                if i!=j:
-                    prod *= val
-            result.append(prod)
             
-        return result
+    def productExceptSelf(self, nums:List[int]) -> List[int]:
+        n = len(nums)
+        result = [1] * n
+        prefix = 1
+        for i in range(n):
+            result[i] = prefix
+            prefix *= nums[i]
+        # print(result)
+        postfix = 1
+        for i in range(n-1, -1, -1):
+            result[i] *= postfix
+            postfix *= nums[i]
+        return result            
+
+        # return nums
+    
+
+        
 
 
 
 
 print(Solution().productExceptSelf(nums=[1,2,3,4]))
+# print(Solution().productExceptSelf(nums=[-1,1,0,-3,3]))
+
+## brute force -> time = 0(n^2), space = O(n)
+
 
             
