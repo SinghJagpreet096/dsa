@@ -16,16 +16,13 @@ The test cases are generated such that the number of unique combinations that su
 # TODO backtracking and recursion
 class Solution:
     def combinationSum(self, candidates:list[int], target:int) -> list[list[int]]:
-
+        sol = []
         candidates.sort()
-        result = []
-        for idx, val in enumerate(candidates):
-            if sum(result) == target:
-                return 
+        if sum(sol) == target:
+            return sol
+        
+        return combinationSum(candidates, target)
 
-        print( candidates)
-
-        return [[]]
     
 if __name__ == "__main__":
     s = Solution()

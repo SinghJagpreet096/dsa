@@ -41,9 +41,6 @@ class Solution:
             postfix *= nums[i]
         return result            
 
-        # return nums
-    
-
         
 
 
